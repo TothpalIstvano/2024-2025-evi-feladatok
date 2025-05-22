@@ -3,7 +3,7 @@
 - #### <h3>SQL nugget needed:</h3>
      - >MySqlConnector <span>&#8594;</span> ez egy NuGet csomag <br>
         <img src="https://api.nuget.org/v3-flatcontainer/mysqlconnector/2.4.0/icon" alt="MySqlConnector ikon" style="width: 100px; display: block; margin-top: 20px;">
-     - >Elérési útvonal <span>&#8594;</span> <ins> Tools <span>&#8594;</span> Nuget package manager <span>&#8594;</span> Manage NuGet packeges for Sulution </ins>       <img src="https://www.serkanseker.com/wp-content/uploads/2021/01/Package-Manager-Settings.png" alt="MySqlConnector ikon" style="width: 450px; display: block; margin-top: 20px;">
+     - >Elérési útvonal <span>&#8594;</span> <ins> Tools <span>&#8594;</span> Nuget package manager <span>&#8594;</span> Manage NuGet packeges for Sulution </ins> <br> <img src="https://www.serkanseker.com/wp-content/uploads/2021/01/Package-Manager-Settings.png" alt="MySqlConnector ikon" style="width: 450px; display: block; margin-top: 20px;">
 - #### <h3>Builder:</h3>
     ``` c#
         var builder = new MySqlConnectionStringBuilder
@@ -316,3 +316,4 @@
         Console.WriteLine(person.GetFullName()); // "John Doe"
         person.CelebrateBirthday(); // "Happy birthday, John! Now you're 32." 
     ```
+#
