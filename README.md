@@ -430,15 +430,5 @@
               }
           }
        ```
-   >     using MySqlConnector;
-          using System;
-          using System.Collections.Generic;
-          using System.ComponentModel;
-          using System.Data;
-          using System.Drawing;
-          using System.IO;
-          using System.Linq;
-          using System.Text;
-          using System.Threading.Tasks;
-          using System.Windows.Forms;
+   >using MySqlConnector;<br>using System;<br>using System.Collections.Generic;<br>using System.ComponentModel;<br>using System.Data;<br>using System.Drawing;<br>using System.IO;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>using System.Windows.Forms;<br>
           
