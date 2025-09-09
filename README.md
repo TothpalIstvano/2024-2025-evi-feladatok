@@ -317,3 +317,130 @@
         person.CelebrateBirthday(); // "Happy birthday, John! Now you're 32." 
     ```
 #
+
+- #### <h3>Példa kód:</h3>
+       ```c#
+          using MySqlConnector;
+          using System;
+          using System.Collections.Generic;
+          using System.ComponentModel;
+          using System.Data;
+          using System.Drawing;
+          using System.IO;
+          using System.Linq;
+          using System.Text;
+          using System.Threading.Tasks;
+          using System.Windows.Forms;
+          
+          namespace gyak
+          {
+              public partial class Form1 : Form
+              {
+                  static MySqlConnection kapcsolat;
+                  static TableLayoutPanel tableLayoutPanel1 = new TableLayoutPanel();
+                  public Form1()
+                  {
+                      InitializeComponent();
+          
+                      var builder = new MySqlConnectionStringBuilder
+                      {
+                          Server = "127.0.0.1",
+                          UserID = "root",
+                          Password = "mysql",
+                          Database = "Ingatlan"
+          
+                      };
+          
+                      kapcsolat = new MySqlConnection(builder.ConnectionString);
+                      kapcsolat.Open();
+                  }
+          
+                  private void Form1_Load(object sender, EventArgs e)
+                  {
+                      var command = kapcsolat.CreateCommand();
+                      command.CommandText = "Select COUNT(Nev) From eladok";
+          
+                      var reader = command.ExecuteReader();
+                      if (reader.Read())
+                      {
+                          tableLayoutPanel1.RowCount = reader.GetInt32(0);
+                      }
+                      reader.Close();
+                      tableLayoutPanel1.ColumnCount = 3;
+                      tableLayoutPanel1.Width = 600;
+                      tableLayoutPanel1.Height = 60 * tableLayoutPanel1.RowCount;
+                      tableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+                      tableLayoutPanel1.BackColor = Color.Green;
+                      this.Controls.Add(tableLayoutPanel1);
+          
+                      command.CommandText = "Select Nev, Telefon, Email From eladok";
+                      reader = command.ExecuteReader();
+                      int i = 0;
+                      while (reader.Read())
+                      {
+                          i++;
+                          var nev = new Label();
+                          nev.Text = reader.GetString(0);
+                          nev.Dock = DockStyle.Fill;
+                          nev.TextAlign = ContentAlignment.MiddleCenter;
+                          tableLayoutPanel1.Controls.Add(nev, 0, i - 1);
+                          var telefon = new Label();
+                          telefon.Text = reader.GetString(1);
+                          telefon.Dock = DockStyle.Fill;
+                          telefon.TextAlign = ContentAlignment.MiddleCenter;
+                          tableLayoutPanel1.Controls.Add(telefon, 1, i - 1);
+                          var email = new Label();
+                          email.Text = reader.GetString(2);
+                          email.Dock = DockStyle.Fill;
+                          email.TextAlign = ContentAlignment.MiddleCenter;
+                          tableLayoutPanel1.Controls.Add(email, 2, i - 1);
+                      }
+                      for(int j = 0; j < 3; j++)
+                      {
+                          tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / 3));
+                      }
+                      this.Controls.Add(tableLayoutPanel1);
+          
+                      reader.Close();
+          
+                      StreamReader reader2 = new StreamReader("ingatlan.txt", Encoding.UTF8);
+                      List<string> list = new List<string>();
+                      while (!reader2.EndOfStream)
+                      {
+                          list.Add(reader2.ReadLine());
+                      }
+                      string[,] strings = new string[8, list.Count];
+                      for (int j = 0; j < list.Count; j++)
+                      {
+                          var sor = list[j].Split('|');
+                          for (int k = 0; k < 8; k++)
+                          {
+                              strings[k, j] = sor[k];
+                          }
+                      }
+                      DataTable table = new DataTable();
+                      table.Columns.Add("Azonosító");
+                      table.Columns.Add("Eladó");
+                      table.Columns.Add("Település");
+                      table.Columns.Add("Irányítószám");
+                      table.Columns.Add("Cím");
+                      table.Columns.Add("Alapterület");
+                      table.Columns.Add("Szobák száma");
+                      table.Columns.Add("Ár");
+                      for (int j = 0; j < list.Count; j++)
+                      {
+                          table.Rows.Add(strings[0, j], strings[1, j], strings[2, j], strings[3, j], strings[4, j], strings[5, j], strings[6, j], strings[7, j]);
+                      }
+                      var dataGridView1 = new DataGridView();
+                      dataGridView1.DataSource = table;
+                      dataGridView1.Dock = DockStyle.Bottom;
+                      dataGridView1.Height = 200;
+                      this.Controls.Add(dataGridView1);
+                         
+                      reader2.Close();
+                      kapcsolat.Close();
+                  }
+              }
+          }
+
+       ```
