@@ -320,19 +320,6 @@
 
 - #### <h3>Példa kód:</h3>
        ```c#
-          /*
-          using MySqlConnector;
-          using System;
-          using System.Collections.Generic;
-          using System.ComponentModel;
-          using System.Data;
-          using System.Drawing;
-          using System.IO;
-          using System.Linq;
-          using System.Text;
-          using System.Threading.Tasks;
-          using System.Windows.Forms;
-          */
           namespace gyak
           {
               public partial class Form1 : Form
