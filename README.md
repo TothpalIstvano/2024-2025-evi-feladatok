@@ -319,8 +319,7 @@
 #
 
 - #### <h3>Példa kód:</h3>
-       ```c#
-          namespace gyak
+   ```c#
           {
               public partial class Form1 : Form
               {
